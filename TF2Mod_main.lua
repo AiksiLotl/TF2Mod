@@ -1,10 +1,10 @@
 --- STEAMODDED HEADER
---- MOD_NAME: AiksiMod
---- MOD_ID: aiksimod
+--- MOD_NAME: TF2Mod
+--- MOD_ID: tf2mod
 --- MOD_AUTHOR: [Aiksi, Amy Lily]
---- MOD_DESCRIPTION: Some Jokers and Decks!
---- BADGE_COLOUR: cb4bc6
---- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1216c]
+--- MOD_DESCRIPTION: TF2 themed Jokers!
+--- BADGE_COLOUR: fda200
+--- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1326a]
 --- VERSION: 0.1
 
 ----------------------------------------------
