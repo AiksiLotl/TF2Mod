@@ -1,5 +1,6 @@
 -- Joker
 local joker = {
+    object_type = "Joker",
     name = "Scout Joker",
     pos = {x = 0, y = 0},
     atlas = "tf2_mod_atlas_jokers",
@@ -81,7 +82,19 @@ local joker = {
                 }
             end
         end
-	end
+	end,
+
+    mod_credits = {
+		idea = {
+			"Aiksi"
+		},
+		art = {
+			"Amy Lily"
+		},
+		code = {
+			"Aiksi"
+		}
+    }
 }
 
 return joker
