@@ -11,6 +11,8 @@
 ------------MOD CODE -------------------------
 
 local joker_list = {
+    --- Uncommon
+    "j_tf2_heavy",
     --- Rare
     "j_tf2_scout",
 }

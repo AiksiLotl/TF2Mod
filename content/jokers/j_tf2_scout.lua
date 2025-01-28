@@ -65,7 +65,7 @@ local joker = {
                 end
             end
         end
-        if context.end_of_round then
+        if context.end_of_round and not context.individual and not context.repetition then
             -- Resets the odds
             card.ability.extra.current_odds = card.ability.extra.odds - 1
         end
