@@ -1,7 +1,7 @@
 -- Joker
 local joker = {
     name = "Scout Joker",
-    pos = {x = 1, y = 1},
+    pos = {x = 0, y = 0},
     atlas = "tf2_mod_atlas_jokers",
     rarity = 3,
     cost = 8,
@@ -12,14 +12,20 @@ local joker = {
         text = {
             "{C:green}#1# in #2#{} chance to gain a {C:blue}hand{} instead of dying",
             "Each time this happens, {C:red}reduce{} the chance by {C:green}#3#{} this round,",
-            "and {C:purple}create{} a {C:attention,T:j_diet_cola}Diet Cola{} {C:inactive}(Must have room){}",
+            "and {C:purple}create{} a {C:attention,T:j_diet_cola}Diet Cola{} {C:inactive}(Must have room, once per round){}",
             "Each time a {C:attention,T:j_diet_cola}Diet Cola{} is sold,",
-            "increase the odds permanently by {C:green}#3#{}",
+            "increase the odds permanently by {C:green}#3#{} {C:inactive}(Will become {C:green}#4# in #5#{}{C:inactive})",
             "{C:inactive,s:0.8}WOOSH! Miss me! Nanananana~"
         }
     },
     loc_vars = function(self, info_queue, card)
-        return { vars = {card.ability.extra.current_odds * (G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.odds, ''..(G.GAME and G.GAME.probabilities.normal or 1)}}
+        return { vars = {
+            card.ability.extra.current_odds * (G.GAME and G.GAME.probabilities.normal or 1), 
+            card.ability.extra.odds, 
+            ''..(G.GAME and G.GAME.probabilities.normal or 1), 
+            (card.ability.extra.current_odds + 1) * (G.GAME and G.GAME.probabilities.normal or 1),
+            card.ability.extra.odds + 1
+        }}
     end,
     blueprint_compat = true,
     eternal_compat = true,
@@ -38,10 +44,11 @@ local joker = {
                         ease_hands_played(1)
                         -- Reduces the odds
                         card.ability.extra.current_odds = card.ability.extra.current_odds - 1
+
                         G.E_MANAGER:add_event(Event({
                             func = function()
-                                -- Checks if there is available joker space
-                                if #G.jokers.cards < G.jokers.config.card_limit then  
+                                -- Checks if there is available joker space and its the first trigger this round
+                                if #G.jokers.cards < G.jokers.config.card_limit and card.ability.extra.odds - card.ability.extra.current_odds == 2 then
                                     -- Spawns a Diet Cola
                                     add_joker('j_diet_cola', nil, nil, nil)
                                 end
