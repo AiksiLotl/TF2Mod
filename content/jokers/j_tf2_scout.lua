@@ -1,5 +1,6 @@
 -- Joker
 local joker = {
+    object_type = "Joker",
     name = "Scout Joker",
     pos = {x = 0, y = 0},
     atlas = "tf2_mod_atlas_jokers",
@@ -64,7 +65,7 @@ local joker = {
                 end
             end
         end
-        if context.end_of_round then
+        if context.end_of_round and not context.individual and not context.repetition then
             -- Resets the odds
             card.ability.extra.current_odds = card.ability.extra.odds - 1
         end
@@ -81,7 +82,19 @@ local joker = {
                 }
             end
         end
-	end
+	end,
+
+    mod_credits = {
+		idea = {
+			"Aiksi"
+		},
+		art = {
+			"Amy Lily"
+		},
+		code = {
+			"Aiksi"
+		}
+    }
 }
 
 return joker

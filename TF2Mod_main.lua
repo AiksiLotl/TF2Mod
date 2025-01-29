@@ -1,7 +1,7 @@
 --- STEAMODDED HEADER
 --- MOD_NAME: TF2Mod
 --- MOD_ID: tf2mod
---- MOD_AUTHOR: [Aiksi, Amy Lily]
+--- MOD_AUTHOR: [Aiksi, Amy Lily, Rufia]
 --- MOD_DESCRIPTION: TF2 themed Jokers!
 --- BADGE_COLOUR: fda200
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1326a]
@@ -11,6 +11,8 @@
 ------------MOD CODE -------------------------
 
 local joker_list = {
+    --- Uncommon
+    "j_tf2_heavy",
     --- Rare
     "j_tf2_scout",
 }
@@ -81,6 +83,7 @@ for _, v in ipairs(deck_list) do
 
     ::continue::
 end
+
 
 ----------------------------------------------
 ------------MOD CODE END----------------------
