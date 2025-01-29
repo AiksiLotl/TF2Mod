@@ -84,6 +84,37 @@ for _, v in ipairs(deck_list) do
     ::continue::
 end
 
+function Card:multiply_joker_values(multiplier, deep_table)
+    for k, v in pairs(deep_table or self.ability) do
+        if deep_table or self.config.center.config[k] then
+            if type(v) == "number" then
+                if not deep_table then
+                    self.ability[k] = self.ability[k] * multiplier
+                else
+                    deep_table[k] = deep_table[k] * multiplier
+                end
+            elseif type(v) == "table" then
+                self:multiply_joker_values(multiplier, v)
+            end
+        end
+    end
+end
+
+for k, v in pairs(G.P_CENTERS["j_gros_michel"].config.extra) do
+    G.P_CENTERS["j_gros_michel"].config.extra[k] = v * 2.0
+end
+
+--[[ function multiply_joker_values(multiplier, card_table, card_config_center_config, deep)
+    for k, v in pairs(card_table) do
+        if card_config_center_config[k] or deep then
+            if type(v) == "number" then
+                card_table[k] = v * multiplier
+            elseif type(v) == "table" then
+                multiply_joker_values(multiplier, v, card_config_center_config, true)
+            end
+        end
+    end
+end ]]
 
 ----------------------------------------------
 ------------MOD CODE END----------------------

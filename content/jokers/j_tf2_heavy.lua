@@ -7,7 +7,7 @@ local joker = {
     rarity = 2,
     cost = 6,
     discovered = true,
-    config = {Xmult = 2.0, Xmult_mod = 2.0},
+    config = {x_mult = 2.0, Xmult_mod = 2.0, extra = {balls = 23}},
     loc_txt = {
         name = "Heavy Joker",
         text = {
@@ -20,7 +20,7 @@ local joker = {
     },
     loc_vars = function(self, info_queue, card)
         return { vars = {
-            card.ability.Xmult,
+            card.ability.x_mult,
             card.ability.Xmult_mod
         }}
     end,
@@ -30,19 +30,36 @@ local joker = {
 -- The function
     calculate = function(self, card, context)
         if context.end_of_round and not context.individual and not context.repetition then
+            --[[ for i = 1, #G.jokers.cards do
+                G.jokers.cards[i]:multiply_joker_values(2.0)
+            end ]]
+            for k, v in ipairs(G.jokers.cards) do
+                v:multiply_joker_values(2.0)
+                --[[ for k, v in pairs(v.ability) do
+                    print(k, v)
+                end ]]
+            end
+            for k, v in pairs(G.P_CENTERS["j_gros_michel"].config.extra) do
+                G.P_CENTERS["j_gros_michel"].config.extra[k] = v * 2.0
+            end
+        end
+        --[[ for k,v in pairs(context) do
+            print(k, v)
+        end ]]
+        --[[ if context.end_of_round and not context.individual and not context.repetition then
             print("end_of_round")
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i].ability.name == "Gros Michel" then
                     print("banana!")
-                    --[[ for k,v in pairs(G.jokers.cards[i].ability) do
+                    for k,v in pairs(G.jokers.cards[i].ability) do
                         print(k, v)
                     end
                     if G.jokers.cards[i].removed then
                         print("vanished!")
-                    end ]]
-                    --[[ if G.jokers.cards[i].states.drag.is then
+                    end
+                    if G.jokers.cards[i].states.drag.is then
                         print("vanished!")
-                    end ]]
+                    end
                     G.E_MANAGER:add_event(Event({
                         trigger = "condition",
                         blocking = false, 
@@ -63,7 +80,7 @@ local joker = {
                     }))
                 end
             end
-        end
+        end ]]
 	end,
 
     mod_credits = {
